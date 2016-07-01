@@ -1,0 +1,41 @@
+{
+  "name": "json-to-es-module",
+  "version": "1.0.0",
+  "description": "Convert JSON to an ECMAScript module",
+  "repository": "shinnn/json-to-es-module",
+  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+  "scripts": {
+    "pretest": "eslint --fix --config @shinnn/node --rule 'complexity: 0' index.js test.js",
+    "test": "node --strong_mode --throw-deprecation --track-heap-objects test.js",
+    "coverage": "node --strong_mode node_modules/.bin/istanbul cover test.js"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "json",
+    "es",
+    "ecmascript",
+    "export",
+    "module",
+    "convert",
+    "parse",
+    "prepend"
+  ],
+  "dependencies": {
+    "is-obj": "^1.0.1",
+    "parse-json": "^2.2.0",
+    "stringify-object": "^2.4.0"
+  },
+  "devDependencies": {
+    "@shinnn/eslint-config-node": "^2.0.0",
+    "eslint": "^2.13.1",
+    "istanbul": "^0.4.4",
+    "nop": "^1.0.0",
+    "require-from-string": "^1.2.0",
+    "rollup": "^0.33.0",
+    "rollup-plugin-hypothetical": "^1.0.1",
+    "tape": "^4.6.0"
+  }
+}
