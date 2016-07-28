@@ -15,7 +15,7 @@ test('jsonToEsModule()', t => {
   const result = jsonToEsModule('[\n  1,\n  "\'foo"\n  ]\n');
   t.strictEqual(
     result,
-    'export default [\n  1,\n  \'\\\'foo\'\n]\n',
+    'export default [\n  1,\n  \'\\\'foo\'\n];\n',
     'should append `module export` to JSON.'
   );
 
@@ -42,7 +42,7 @@ test('jsonToEsModule()', t => {
       filter: noop,
       inlineCharacterLimit: 0
     }),
-    'export default "A"\n',
+    'export default "A";\n',
     'should support stringify-object options.'
   );
 
@@ -56,7 +56,7 @@ test('jsonToEsModule()', t => {
         return `${v}c`;
       }
     }),
-    'export default {\n  a: \'bc\'\n}\n',
+    'export default {\n  a: \'bc\'\n};\n',
     'should support JSON.parse\'s `reviver` option.'
   );
 

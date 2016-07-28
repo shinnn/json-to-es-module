@@ -92,5 +92,5 @@ module.exports = function jsonToEsModule(...args) {
 
   return prepended +
          stringifyObject(parseJson(str, options.reviver, options.filename), options) +
-         '\n';
+         ';\n';
 };
