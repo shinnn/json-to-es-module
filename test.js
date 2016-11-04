@@ -62,19 +62,19 @@ test('jsonToEsModule()', t => {
 
   t.throws(
     () => jsonToEsModule(),
-    /^TypeError.*Expected 1 or 2 arguments \(str\[, options\]\), but received no arguments\./,
+    /^TypeError.*Expected 1 or 2 arguments \(str\[, options]\), but received no arguments\./,
     'should throw a type error when it takes no arguments.'
   );
 
   t.throws(
     () => jsonToEsModule('1', {}, true),
-    /^TypeError.*Expected 1 or 2 arguments \(str\[, options\]\), but received 3 arguments\./,
+    /^TypeError.*Expected 1 or 2 arguments \(str\[, options]\), but received 3 arguments\./,
     'should throw a type error when it takes more than two arguments.'
   );
 
   t.throws(
     () => jsonToEsModule([Infinity, '000']),
-    /^TypeError.*Expected a JSON string, but got \[ Infinity, '000' \]\./,
+    /^TypeError.*Expected a JSON string, but got \[ Infinity, '000' ]\./,
     'should throw a type error when the first argument is not a string.'
   );
 
