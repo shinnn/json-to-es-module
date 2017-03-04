@@ -26,17 +26,17 @@
   "dependencies": {
     "is-obj": "^1.0.1",
     "parse-json": "^2.2.0",
-    "stringify-object": "^2.4.0"
+    "stringify-object": "^3.1.0"
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^3.0.0",
-    "eslint": "^3.9.1",
+    "eslint": "^3.17.0",
     "istanbul": "^0.4.5",
     "nop": "^1.0.0",
     "require-from-string": "^1.2.1",
-    "rollup": "^0.36.3",
+    "rollup": "^0.41.4",
     "rollup-plugin-hypothetical": "^1.2.1",
-    "tape": "^4.6.2"
+    "tape": "^4.6.3"
   },
   "eslintConfig": {
     "extends": "@shinnn/node"
