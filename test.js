@@ -120,12 +120,10 @@ test('jsonToEsModule()', t => {
     'should throw a type error when `filename` option is not a function.'
   );
 
-  /* Re-enable this test after Qix-/node-error-ex is fixed
   t.throws(
     () => jsonToEsModule('{', {filename: './fixture.json'}),
     /Unexpected end of input at 1:2 in \.\/fixture.json/,
     'should throw an error when it takes corrupt JSON.'
   );
-  */
 });
 
