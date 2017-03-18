@@ -7,9 +7,7 @@ const {rollup} = require('rollup');
 const rollupPluginHypothetical = require('rollup-plugin-hypothetical');
 const test = require('tape');
 
-test('jsonToEsModule()', t => {
-  t.plan(15);
-
+test('jsonToEsModule()', async t => {
   t.strictEqual(jsonToEsModule.name, 'jsonToEsModule', 'should have a function name.');
 
   const result = jsonToEsModule('[\n  1,\n  "\'foo"\n  ]\n');
@@ -19,7 +17,7 @@ test('jsonToEsModule()', t => {
     'should append `module export` to JSON.'
   );
 
-  rollup({
+  const bundle = await rollup({
     entry: './tmp.js',
     plugins: [
       rollupPluginHypothetical({
@@ -28,13 +26,13 @@ test('jsonToEsModule()', t => {
         }
       })
     ]
-  }).then(bundle => {
-    t.deepEqual(
-      requireFromString(bundle.generate({format: 'cjs'}).code),
-      [1, '\'foo'],
-      'should create a valid ES module.'
-    );
   });
+
+  t.deepEqual(
+    requireFromString(bundle.generate({format: 'cjs'}).code),
+    [1, '\'foo'],
+    'should create a valid ES module.'
+  );
 
   t.strictEqual(
     jsonToEsModule('"A"', {
@@ -99,7 +97,7 @@ test('jsonToEsModule()', t => {
   t.throws(
     () => jsonToEsModule('{}', {filter: 0}),
     /^TypeError.* `filter` option must be a function, but 0 isn't\. /,
-    'should throw a type error when `singleQuotes` option is not Boolean.'
+    'should throw a type error when `filter` option is not a function.'
   );
 
   t.throws(
@@ -125,5 +123,6 @@ test('jsonToEsModule()', t => {
     /Unexpected end of input at 1:2 in \.\/fixture.json/,
     'should throw an error when it takes corrupt JSON.'
   );
-});
 
+  t.end();
+});
