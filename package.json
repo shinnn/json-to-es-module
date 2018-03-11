@@ -1,44 +1,44 @@
 {
-  "name": "json-to-es-module",
-  "version": "1.0.0",
-  "description": "Convert JSON to an ECMAScript module",
-  "repository": "shinnn/json-to-es-module",
-  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
-  "scripts": {
-    "pretest": "eslint --fix --format=codeframe --rule='complexity: 0' index.js test.js",
-    "test": "node --throw-deprecation --track-heap-objects test.js",
-    "coverage": "istanbul cover test.js"
-  },
-  "license": "MIT",
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "json",
-    "es",
-    "ecmascript",
-    "export",
-    "module",
-    "convert",
-    "parse",
-    "prepend"
-  ],
-  "dependencies": {
-    "is-obj": "^1.0.1",
-    "parse-json": "^2.2.0",
-    "stringify-object": "^3.1.0"
-  },
-  "devDependencies": {
-    "@shinnn/eslint-config-node": "^3.0.0",
-    "eslint": "^3.17.0",
-    "istanbul": "^0.4.5",
-    "nop": "^1.0.0",
-    "require-from-string": "^1.2.1",
-    "rollup": "^0.41.4",
-    "rollup-plugin-hypothetical": "^1.2.1",
-    "tape": "^4.6.3"
-  },
-  "eslintConfig": {
-    "extends": "@shinnn/node"
-  }
+	"name": "json-to-es-module",
+	"version": "1.0.1",
+	"description": "Convert JSON to an ECMAScript module",
+	"repository": "shinnn/json-to-es-module",
+	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+	"scripts": {
+		"pretest": "eslint --fix --format=codeframe --rule='complexity: 0' index.js test.js",
+		"test": "node --throw-deprecation --track-heap-objects test.js",
+		"coverage": "istanbul cover test.js"
+	},
+	"license": "MIT",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"json",
+		"es",
+		"ecmascript",
+		"export",
+		"module",
+		"convert",
+		"parse",
+		"prepend"
+	],
+	"dependencies": {
+		"is-obj": "^1.0.1",
+		"parse-json": "^2.2.0",
+		"stringify-object": "^3.1.0"
+	},
+	"devDependencies": {
+		"@shinnn/eslint-config-node": "^3.0.0",
+		"eslint": "^3.17.0",
+		"istanbul": "^0.4.5",
+		"nop": "^1.0.0",
+		"require-from-string": "^1.2.1",
+		"rollup": "^0.41.4",
+		"rollup-plugin-hypothetical": "^1.2.1",
+		"tape": "^4.6.3"
+	},
+	"eslintConfig": {
+		"extends": "@shinnn/node"
+	}
 }
