@@ -1,16 +1,14 @@
 # json-to-es-module
 
-[![NPM version](https://img.shields.io/npm/v/json-to-es-module.svg)](https://www.npmjs.com/package/json-to-es-module)
+[![npm version](https://img.shields.io/npm/v/json-to-es-module.svg)](https://www.npmjs.com/package/json-to-es-module)
 [![Build Status](https://travis-ci.org/shinnn/json-to-es-module.svg?branch=master)](https://travis-ci.org/shinnn/json-to-es-module)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/json-to-es-module.svg)](https://coveralls.io/r/shinnn/json-to-es-module)
-[![dependencies Status](https://david-dm.org/shinnn/json-to-es-module/status.svg)](https://david-dm.org/shinnn/json-to-es-module)
-[![devDependencies Status](https://david-dm.org/shinnn/json-to-es-module/dev-status.svg)](https://david-dm.org/shinnn/json-to-es-module?type=dev)
 
 Convert [JSON](https://www.ietf.org/rfc/rfc4627.txt) to an ECMAScript module
 
 ```json
 {
-  "name": "Michael"
+  "name": "Sam"
 }
 ```
 
@@ -18,13 +16,13 @@ Convert [JSON](https://www.ietf.org/rfc/rfc4627.txt) to an ECMAScript module
 
 ```javascript
 export default {
-  name: 'Michael'
+  name: 'Sam'
 };
 ```
 
 ## Installation
 
-[Use npm.](https://docs.npmjs.com/cli/install)
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
 
 ```
 npm install json-to-es-module
@@ -38,9 +36,9 @@ const jsonToEsModule = require('json-to-es-module');
 
 ### jsonToEsModule(*str* [, *options*])
 
-*str*: `String` (JSON string)  
+*str*: `string` (JSON string)  
 *options*: `Object`  
-Return: `String`
+Return: `string`
 
 #### options
 
@@ -67,6 +65,6 @@ jsonToEsModule('{"a": "b"}', {singleQuotes: false}); //=> 'export default {\n  a
 
 ## License
 
-Copyright (c) 2016 - 2017 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) 2016 - 2018 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
