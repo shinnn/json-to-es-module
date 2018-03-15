@@ -76,8 +76,20 @@ test('jsonToEsModule()', async t => {
 	);
 
 	t.throws(
+		() => jsonToEsModule(''),
+		/^Error.*Expected a JSON string, but got '' \(empty string\)\./,
+		'should throw a type error when the first argument is an empty string.'
+	);
+
+	t.throws(
+		() => jsonToEsModule(' \n\t'),
+		/^Error.*Expected a JSON string, but got a whitespace-only string ' \\n\\t'\./,
+		'should throw a type error when the first argument is an whitespace-only string.'
+	);
+
+	t.throws(
 		() => jsonToEsModule('{}', NaN),
-		/^TypeError.*Expected an object, but got NaN\./,
+		/^TypeError.*Expected an options Object, but got NaN\./,
 		'should throw a type error when the second argument is not an object.'
 	);
 

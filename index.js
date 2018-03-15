@@ -9,7 +9,7 @@ const stringifyObject = require('stringify-object');
 const prepended = 'export default ';
 
 module.exports = function jsonToEsModule(...args) {
-	if (args.length !== 1 || args.length !== 2) {
+	if (args.length !== 1 && args.length !== 2) {
 		throw new TypeError(`Expected 1 or 2 arguments (str[, options]), but received ${
 			args.length === 0 ? 'no' : String(args.length)
 		} arguments.`);
@@ -21,8 +21,16 @@ module.exports = function jsonToEsModule(...args) {
 		throw new TypeError(`Expected a JSON string, but got ${inspect(str)}.`);
 	}
 
-	if (args[1] !== undefined && !isObj(args[1])) {
-		throw new TypeError(`Expected an object, but got ${inspect(args[1])}.`);
+	if (str.length === 0) {
+		throw new Error('Expected a JSON string, but got \'\' (empty string).');
+	}
+
+	if (str.trim().length === 0) {
+		throw new Error(`Expected a JSON string, but got a whitespace-only string ${inspect(str)}.`);
+	}
+
+	if (args.length === 2 && !isObj(args[1])) {
+		throw new TypeError(`Expected an options Object, but got ${inspect(args[1])}.`);
 	}
 
 	const options = Object.assign({indent: '  '}, args[1]);
