@@ -23,17 +23,18 @@
 		"prepend"
 	],
 	"dependencies": {
+		"inspect-with-kind": "^1.0.4",
 		"is-obj": "^1.0.1",
 		"parse-json": "^4.0.0",
 		"stringify-object": "^3.2.2"
 	},
 	"devDependencies": {
 		"@shinnn/eslint-config-node": "^5.0.0",
-		"eslint": "^4.18.2",
+		"eslint": "^4.19.0",
 		"lodash": "^4.17.5",
 		"nyc": "^11.6.0",
 		"require-from-string": "^2.0.1",
-		"rollup": "^0.57.0",
+		"rollup": "^0.57.1",
 		"rollup-plugin-hypothetical": "^2.1.0",
 		"tape": "^4.9.0"
 	},

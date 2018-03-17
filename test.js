@@ -71,7 +71,7 @@ test('jsonToEsModule()', async t => {
 
 	t.throws(
 		() => jsonToEsModule([Infinity, '000']),
-		/^TypeError.*Expected a JSON string, but got \[ Infinity, '000' ]\./,
+		/^TypeError.*Expected a JSON string, but got \[ Infinity, '000' ] \(array\)\./,
 		'should throw a type error when the first argument is not a string.'
 	);
 
@@ -89,13 +89,13 @@ test('jsonToEsModule()', async t => {
 
 	t.throws(
 		() => jsonToEsModule('{}', NaN),
-		/^TypeError.*Expected an options Object, but got NaN\./,
+		/^TypeError.*Expected an options Object, but got NaN \(number\)\./,
 		'should throw a type error when the second argument is not an object.'
 	);
 
 	t.throws(
 		() => jsonToEsModule('{}', {indent: 1}),
-		/^TypeError.*`indent` option must be a string, but 1 isn't\. /,
+		/^TypeError.*`indent` option must be a string, but 1 \(number\) isn't\. /,
 		'should throw a type error when `indent` option is not a string.'
 	);
 
@@ -107,25 +107,25 @@ test('jsonToEsModule()', async t => {
 
 	t.throws(
 		() => jsonToEsModule('{}', {filter: 0}),
-		/^TypeError.* `filter` option must be a function, but 0 isn't\. /,
+		/^TypeError.* `filter` option must be a function, but 0 \(number\) isn't\. /,
 		'should throw a type error when `filter` option is not a function.'
 	);
 
 	t.throws(
 		() => jsonToEsModule('{}', {inlineCharacterLimit: {x: 'y'}}),
-		/^TypeError.*`inlineCharacterLimit` option must be a number, but { x: 'y' } isn't\. /,
+		/^TypeError.*`inlineCharacterLimit` option must be a number, but { x: 'y' } \(object\) isn't\. /,
 		'should throw a type error when `inlineCharacterLimit` option is not a number.'
 	);
 
 	t.throws(
 		() => jsonToEsModule('{}', {reviver: Math.PI}),
-		/^TypeError.*3\.14\d+ is not a function\. `reviver` option must be a function /,
+		/^TypeError.*3\.14\d+ \(number\) is not a function\. `reviver` option must be a function /,
 		'should throw a type error when `reviver` option is not a function.'
 	);
 
 	t.throws(
-		() => jsonToEsModule('{}', {filename: /regex/}),
-		/^TypeError.*\/regex\/ is not a string\. Expected a filename displayed in the error message\./,
+		() => jsonToEsModule('{}', {filename: /re/}),
+		/^TypeError.*\/re\/ \(regexp\) is not a string\. Expected a filename displayed in the error message\./,
 		'should throw a type error when `filename` option is not a function.'
 	);
 
