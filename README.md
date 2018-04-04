@@ -42,21 +42,7 @@ Return: `string`
 
 #### options
 
-[`reviver`](https://github.com/sindresorhus/parse-json#reviver) and [`filename`](https://github.com/sindresorhus/parse-json#filename) will be passed to [parse-json](https://github.com/sindresorhus/parse-json#parsejsoninput-reviver-filename) while JSON parsing.
-
-```javascript
-jsonToEsModule('[1]', {
-  reviver(k, v) {
-    if (k === '') {
-      return v;
-    }
-
-    return v * 10;
-  }
-}); //=> 'export default [\n  10\n];\n'
-```
-
-Also [`indent`](https://github.com/yeoman/stringify-object#indent), [`singleQuotes`](https://github.com/yeoman/stringify-object#singlequotes), [`filter`](https://github.com/yeoman/stringify-object#filterobj-prop) and [`inlineCharacterLimit`](https://github.com/yeoman/stringify-object#inlinecharacterlimit) will passed to [stringify-object](https://github.com/yeoman/stringify-object#stringifyobjectinput-options) while stringification.
+[`filename`](https://github.com/sindresorhus/parse-json#filename) will be passed to [parse-json](https://github.com/sindresorhus/parse-json#parsejsoninput-reviver-filename) while JSON parsing, and [`indent`](https://github.com/yeoman/stringify-object#indent), [`singleQuotes`](https://github.com/yeoman/stringify-object#singlequotes), [`filter`](https://github.com/yeoman/stringify-object#filterobj-prop) and [`inlineCharacterLimit`](https://github.com/yeoman/stringify-object#inlinecharacterlimit) will passed to [stringify-object](https://github.com/yeoman/stringify-object#stringifyobjectinput-options) while stringification.
 
 ```javascript
 jsonToEsModule('{"a": "b"}', {singleQuotes: true}); //=> 'export default {\n  a: \'b\'\n};\n'

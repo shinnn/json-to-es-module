@@ -43,20 +43,6 @@ test('jsonToEsModule()', async t => {
 		'should support stringify-object options.'
 	);
 
-	t.equal(
-		jsonToEsModule('  \n\n{\n"a": "b"\n}\n   \n\n', {
-			reviver(k, v) {
-				if (k === '') {
-					return v;
-				}
-
-				return `${v}c`;
-			}
-		}),
-		'export default {\n  a: \'bc\'\n};\n',
-		'should support JSON.parse\'s `reviver` option.'
-	);
-
 	t.throws(
 		() => jsonToEsModule(),
 		/^TypeError.*Expected 1 or 2 arguments \(str\[, options]\), but received no arguments\./,
@@ -115,12 +101,6 @@ test('jsonToEsModule()', async t => {
 		() => jsonToEsModule('{}', {inlineCharacterLimit: {x: 'y'}}),
 		/^TypeError.*`inlineCharacterLimit` option must be a number, but { x: 'y' } \(object\) isn't\. /,
 		'should throw a type error when `inlineCharacterLimit` option is not a number.'
-	);
-
-	t.throws(
-		() => jsonToEsModule('{}', {reviver: Math.PI}),
-		/^TypeError.*3\.14\d+ \(number\) is not a function\. `reviver` option must be a function /,
-		'should throw a type error when `reviver` option is not a function.'
 	);
 
 	t.throws(

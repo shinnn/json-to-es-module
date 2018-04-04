@@ -66,14 +66,6 @@ module.exports = function jsonToEsModule(...args) {
 		}
 	}
 
-	if ('reviver' in options) {
-		if (typeof options.reviver !== 'function') {
-			throw new TypeError(`${inspectWithKind(options.reviver)
-			} is not a function. \`reviver\` option must be a function used by \`JSON.parse\`.` +
-        ' https://tc39.github.io/ecma262/#sec-json.parse');
-		}
-	}
-
 	if ('filename' in options) {
 		if (typeof options.filename !== 'string') {
 			throw new TypeError(`${inspectWithKind(options.filename)
