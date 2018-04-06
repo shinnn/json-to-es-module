@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/shinnn/json-to-es-module.svg?branch=master)](https://travis-ci.org/shinnn/json-to-es-module)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/json-to-es-module.svg)](https://coveralls.io/r/shinnn/json-to-es-module)
 
-Convert [JSON](https://www.ietf.org/rfc/rfc4627.txt) to an ECMAScript module
+Convert [JSON](https://tools.ietf.org/html/rfc8259) to an ECMAScript module
 
 ```json
 {
@@ -34,19 +34,41 @@ npm install json-to-es-module
 const jsonToEsModule = require('json-to-es-module');
 ```
 
-### jsonToEsModule(*str* [, *options*])
+### jsonToEsModule(*str* [, *option*])
 
 *str*: `string` (JSON string)  
-*options*: `Object`  
+*option*: `Object`  
 Return: `string`
 
-#### options
+```javascript
+jsonToEsModule(`{
+  "foo": 1,
+  "bar": [
+    true,
+    null
+  ]
+}`);
+//=> 'export default {\n\tfoo: 1,\n\tbar: [\n\t\ttrue,\n\t\tnull\n\t]\n};\n'
+```
 
-[`filename`](https://github.com/sindresorhus/parse-json#filename) will be passed to [parse-json](https://github.com/sindresorhus/parse-json#parsejsoninput-reviver-filename) while JSON parsing, and [`indent`](https://github.com/yeoman/stringify-object#indent), [`singleQuotes`](https://github.com/yeoman/stringify-object#singlequotes), [`filter`](https://github.com/yeoman/stringify-object#filterobj-prop) and [`inlineCharacterLimit`](https://github.com/yeoman/stringify-object#inlinecharacterlimit) will passed to [stringify-object](https://github.com/yeoman/stringify-object#stringifyobjectinput-options) while stringification.
+#### option.filename
+
+Type: `string`
+
+Filename displayed in the error message.
 
 ```javascript
-jsonToEsModule('{"a": "b"}', {singleQuotes: true}); //=> 'export default {\n  a: \'b\'\n};\n'
-jsonToEsModule('{"a": "b"}', {singleQuotes: false}); //=> 'export default {\n  a: "b"\n};\n'
+try {
+  jsonToEsModule('"');
+} catch (err) {
+  err.message; //=> Unexpected end of JSON input while parsing near '"'
+}
+
+try {
+  jsonToEsModule('"', {filename: 'source.json'});
+} catch (err) {
+  err.message; //=> Unexpected end of JSON input while parsing near '"' in source.json
+}
 ```
 
 ## License

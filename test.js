@@ -1,7 +1,6 @@
 'use strict';
 
 const jsonToEsModule = require('.');
-const noop = require('lodash/fp/noop');
 const requireFromString = require('require-from-string');
 const {rollup} = require('rollup');
 const rollupPluginHypothetical = require('rollup-plugin-hypothetical');
@@ -12,7 +11,11 @@ test('jsonToEsModule()', async t => {
 
 	t.equal(
 		result,
-		'export default [\n  1,\n  \'\\\'foo\'\n];\n',
+		`export default [
+	1,
+	'\\'foo'
+];
+`,
 		'should append `module export` to JSON.'
 	);
 
@@ -33,14 +36,16 @@ test('jsonToEsModule()', async t => {
 		'should create a valid ES module.'
 	);
 
-	t.equal(
-		jsonToEsModule('"A"', {
-			singleQuotes: false,
-			filter: noop,
-			inlineCharacterLimit: 0
-		}),
-		'export default "A";\n',
-		'should support stringify-object options.'
+	t.throws(
+		() => jsonToEsModule('}', {}),
+		/^JSONError.*Unexpected token \} in JSON at position 0 while parsing near '}'/,
+		'should throw an error when it takes an invalid JSON.'
+	);
+
+	t.throws(
+		() => jsonToEsModule('_', {filename: 'fixture.json'}),
+		/^JSONError.*Unexpected token _ in JSON at position 0 while parsing near '_' in fixture\.json/,
+		'should append filename to the error if provided.'
 	);
 
 	t.throws(
@@ -80,39 +85,9 @@ test('jsonToEsModule()', async t => {
 	);
 
 	t.throws(
-		() => jsonToEsModule('{}', {indent: 1}),
-		/^TypeError.*`indent` option must be a string, but 1 \(number\) isn't\. /,
-		'should throw a type error when `indent` option is not a string.'
-	);
-
-	t.throws(
-		() => jsonToEsModule('{}', {singleQuotes: Buffer.from('true')}),
-		/^TypeError.*`singleQuotes` option must be a Boolean, but <Buffer 74 72 75 65> isn't\. /,
-		'should throw a type error when `singleQuotes` option is not Boolean.'
-	);
-
-	t.throws(
-		() => jsonToEsModule('{}', {filter: 0}),
-		/^TypeError.* `filter` option must be a function, but 0 \(number\) isn't\. /,
-		'should throw a type error when `filter` option is not a function.'
-	);
-
-	t.throws(
-		() => jsonToEsModule('{}', {inlineCharacterLimit: {x: 'y'}}),
-		/^TypeError.*`inlineCharacterLimit` option must be a number, but { x: 'y' } \(object\) isn't\. /,
-		'should throw a type error when `inlineCharacterLimit` option is not a number.'
-	);
-
-	t.throws(
 		() => jsonToEsModule('{}', {filename: /re/}),
-		/^TypeError.*\/re\/ \(regexp\) is not a string\. Expected a filename displayed in the error message\./,
+		/^TypeError.*Expected `filename` option to be a string, but got a non-string value \/re\/ \(regexp\) instead\./,
 		'should throw a type error when `filename` option is not a function.'
-	);
-
-	t.throws(
-		() => jsonToEsModule('{', {filename: './fixture.json'}),
-		/Unexpected end of JSON input while parsing near '{' in \.\/fixture\.json/,
-		'should throw an error when it takes corrupt JSON.'
 	);
 
 	t.end();
