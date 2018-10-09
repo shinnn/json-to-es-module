@@ -12,18 +12,17 @@ const inspectOptions = {
 	compact: false,
 	depth: null
 };
-function switchIndent(doubleSpaces) {
-	return '\t'.repeat(doubleSpaces.length * 0.5);
-}
 
 module.exports = function jsonToEsModule(...args) {
-	if (args.length !== 1 && args.length !== 2) {
-		throw new TypeError(`Expected 1 or 2 arguments (str[, options]), but received ${
-			args.length === 0 ? 'no' : args.length
+	const argLen = args.length;
+
+	if (argLen !== 1 && argLen !== 2) {
+		throw new TypeError(`Expected 1 or 2 arguments (json: <string>[, options: <Objects>]), but received ${
+			argLen === 0 ? 'no' : argLen
 		} arguments.`);
 	}
 
-	const [str, options] = args;
+	const [str, options = {}] = args;
 
 	if (typeof str !== 'string') {
 		throw new TypeError(`Expected a JSON string, but got ${inspectWithKind(str)}.`);
@@ -52,7 +51,7 @@ module.exports = function jsonToEsModule(...args) {
 	}
 
 	return `${prepended}${inspect(
-		parseJson(str, (options || {}).filename),
+		parseJson(str, options.filename),
 		inspectOptions
-	).replace(/^( {2})+/gm, switchIndent)};\n`;
+	).replace(/(?<=^(?: {2})*) {2}/ugm, '\t')};\n`;
 };
