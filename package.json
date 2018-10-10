@@ -4,17 +4,18 @@
 	"description": "Convert JSON to an ECMAScript module",
 	"repository": "shinnn/json-to-es-module",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
-	"scripts": {
-		"pretest": "eslint --fix --format=codeframe index.js test.js",
-		"test": "nyc --reporter=html --reporter=text node test.js"
-	},
 	"license": "ISC",
+	"scripts": {
+		"pretest": "eslint .",
+		"test": "nyc node --experimental-vm-modules test.js"
+	},
 	"files": [
 		"index.js"
 	],
 	"keywords": [
 		"json",
 		"es",
+		"esm",
 		"ecmascript",
 		"export",
 		"module",
@@ -23,20 +24,22 @@
 		"prepend"
 	],
 	"dependencies": {
-		"inspect-with-kind": "^1.0.4",
+		"inspect-with-kind": "^1.0.5",
 		"is-obj": "^1.0.1",
 		"parse-json": "^4.0.0"
 	},
 	"devDependencies": {
-		"@shinnn/eslint-config-node": "^5.0.0",
-		"eslint": "^4.19.1",
-		"nyc": "^11.6.0",
-		"require-from-string": "^2.0.1",
-		"rollup": "^0.57.1",
-		"rollup-plugin-hypothetical": "^2.1.0",
-		"tape": "^4.9.0"
+		"@shinnn/eslint-config": "^6.7.1",
+		"eslint": "^5.6.1",
+		"lodash": "^4.17.11",
+		"nyc": "^13.0.1",
+		"nyc-config-common": "^1.0.0",
+		"tape": "^4.9.1"
 	},
 	"eslintConfig": {
-		"extends": "@shinnn/node"
+		"extends": "@shinnn"
+	},
+	"nyc": {
+		"extends": "nyc-config-common"
 	}
 }

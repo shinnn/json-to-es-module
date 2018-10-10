@@ -1,9 +1,9 @@
 'use strict';
 
+const {SourceTextModule} = require('vm');
+
 const jsonToEsModule = require('.');
-const requireFromString = require('require-from-string');
-const {rollup} = require('rollup');
-const rollupPluginHypothetical = require('rollup-plugin-hypothetical');
+const noop = require('lodash/noop');
 const test = require('tape');
 
 test('jsonToEsModule()', async t => {
@@ -19,19 +19,14 @@ test('jsonToEsModule()', async t => {
 		'should append `module export` to JSON.'
 	);
 
-	const bundle = await rollup({
-		input: './tmp.mjs',
-		plugins: [
-			rollupPluginHypothetical({
-				files: {
-					'./tmp.mjs': result
-				}
-			})
-		]
-	});
+	const createdModule = new SourceTextModule(result);
+
+	await createdModule.link(noop);
+	createdModule.instantiate();
+	await createdModule.evaluate();
 
 	t.deepEqual(
-		requireFromString((await bundle.generate({format: 'cjs'})).code),
+		createdModule.namespace.default,
 		[1, '\'foo'],
 		'should create a valid ES module.'
 	);
@@ -85,8 +80,8 @@ test('jsonToEsModule()', async t => {
 	);
 
 	t.throws(
-		() => jsonToEsModule('{}', {filename: /re/}),
-		/^TypeError.*Expected `filename` option to be a string, but got a non-string value \/re\/ \(regexp\) instead\./u,
+		() => jsonToEsModule('{}', {filename: /re/u}),
+		/^TypeError.*Expected `filename` option to be a string, but got a non-string value \/re\/u \(regexp\) instead\./u,
 		'should throw a type error when `filename` option is not a function.'
 	);
 
