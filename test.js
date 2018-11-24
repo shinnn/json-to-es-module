@@ -7,13 +7,13 @@ const noop = require('lodash/noop');
 const test = require('tape');
 
 test('jsonToEsModule()', async t => {
-	const result = jsonToEsModule('[\n  1,\n  "\'foo"\n  ]\n');
+	const result = jsonToEsModule('[\n  -0,\n  "\'foo"\n]\n');
 
 	t.equal(
 		result,
 		`export default [
-	1,
-	'\\'foo'
+	-0,
+	"'foo"
 ];
 `,
 		'should append `module export` to JSON.'
@@ -27,7 +27,7 @@ test('jsonToEsModule()', async t => {
 
 	t.deepEqual(
 		createdModule.namespace.default,
-		[1, '\'foo'],
+		[-0, '\'foo'],
 		'should create a valid ES module.'
 	);
 
