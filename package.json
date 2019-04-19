@@ -7,7 +7,7 @@
 	"license": "ISC",
 	"scripts": {
 		"pretest": "eslint .",
-		"test": "nyc node --experimental-vm-modules test.js"
+		"test": "coverage node --experimental-vm-modules test.js"
 	},
 	"files": [
 		"index.js"
@@ -25,21 +25,17 @@
 	],
 	"dependencies": {
 		"inspect-with-kind": "^1.0.5",
-		"is-obj": "^1.0.1",
+		"is-obj": "^2.0.0",
 		"parse-json": "^4.0.0"
 	},
 	"devDependencies": {
-		"@shinnn/eslint-config": "^6.7.1",
-		"eslint": "^5.6.1",
+		"@shinnn/eslint-config": "^6.10.2",
+		"coverage": "^0.1.5",
+		"eslint": "^5.16.0",
 		"lodash": "^4.17.11",
-		"nyc": "^13.0.1",
-		"nyc-config-common": "^1.0.0",
-		"tape": "^4.9.1"
+		"tape": "^4.10.1"
 	},
 	"eslintConfig": {
 		"extends": "@shinnn"
-	},
-	"nyc": {
-		"extends": "nyc-config-common"
 	}
 }

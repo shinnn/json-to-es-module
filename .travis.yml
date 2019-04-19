@@ -3,4 +3,3 @@ dist: xenial
 language: node_js
 node_js: node
 cache: npm
-after_script: node_modules/.bin/nyc report | nyc coveralls

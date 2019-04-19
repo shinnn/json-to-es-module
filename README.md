@@ -1,8 +1,8 @@
 # json-to-es-module
 
 [![npm version](https://img.shields.io/npm/v/json-to-es-module.svg)](https://www.npmjs.com/package/json-to-es-module)
-[![Build Status](https://travis-ci.org/shinnn/json-to-es-module.svg?branch=master)](https://travis-ci.org/shinnn/json-to-es-module)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/json-to-es-module.svg)](https://coveralls.io/r/shinnn/json-to-es-module)
+[![Build Status](https://travis-ci.com/shinnn/json-to-es-module.svg?branch=master)](https://travis-ci.com/shinnn/json-to-es-module)
+[![codecov](https://codecov.io/gh/shinnn/json-to-es-module/branch/master/graph/badge.svg)](https://codecov.io/gh/shinnn/json-to-es-module)
 
 Convert [JSON](https://tools.ietf.org/html/rfc8259) to an ECMAScript module
 
@@ -22,7 +22,7 @@ export default {
 
 ## Installation
 
-[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/about-npm/).
 
 ```
 npm install json-to-es-module
@@ -73,4 +73,4 @@ try {
 
 ## License
 
-[ISC License](./LICENSE) © 2018 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2018 - 2019 Shinnosuke Watanabe
