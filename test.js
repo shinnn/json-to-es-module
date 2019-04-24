@@ -31,6 +31,12 @@ test('jsonToEsModule()', async t => {
 		'should create a valid ES module.'
 	);
 
+	t.equal(
+		jsonToEsModule('"\\"\'"'),
+		'export default `"\'`;\n',
+		'should support top-level primitive value.'
+	);
+
 	t.throws(
 		() => jsonToEsModule('}', {}),
 		/^JSONError.*Unexpected token \} in JSON at position 0 while parsing near '\}'/u,
