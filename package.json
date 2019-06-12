@@ -1,6 +1,6 @@
 {
 	"name": "json-to-es-module",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "Convert JSON to an ECMAScript module",
 	"repository": "shinnn/json-to-es-module",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
